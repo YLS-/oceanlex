@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX "uniq_meaning_sentence_order" ON "meaning_sentences" USING btree ("meaning_id","order");
