@@ -1,0 +1,34 @@
+{
+	"name": "@oceanlex/db",
+	"version": "0.1.0",
+	"packageManager": "pnpm@10.17.0",
+	"description": "Oceanlex DB",
+	"author": "Yohann Ségalat",
+	"license": "ISC",
+	"type": "commonjs",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"exports": {
+		".": "./dist/index.js"
+	},
+	"scripts": {
+		"dev": "tsx watch src/dev.ts",
+		"studio": "drizzle-kit studio",
+		"generate": "drizzle-kit generate",
+		"migrate": "tsx src/migrate.ts",
+		"build": "tsc -p tsconfig.json",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"dependencies": {
+		"drizzle-orm": "^0.44.5",
+		"pg": "^8.16.3"
+	},
+	"devDependencies": {
+		"@types/node": "^24.5.2",
+		"@types/pg": "^8.15.5",
+		"dotenv": "^17.2.2",
+		"drizzle-kit": "^0.31.4",
+		"tsx": "^4.20.5",
+		"typescript": "^5.9.2"
+	}
+}

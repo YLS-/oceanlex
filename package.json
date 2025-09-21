@@ -1,0 +1,18 @@
+{
+	"name": "oceanlex",
+	"private": true,
+	"packageManager": "pnpm@10.17.0",
+	"scripts": {
+		"dev": "turbo run dev",
+		"build": "turbo run build",
+		"lint": "turbo run lint",
+		"format": "prettier -w .",
+		"db:up": "docker compose up -d db",
+		"db:down": "docker compose down",
+		"db:studio": "pnpm --filter @oceanlex/db run studio"
+	},
+	"devDependencies": {
+		"prettier": "^3.3.3",
+		"turbo": "^2.5.6"
+	}
+}
