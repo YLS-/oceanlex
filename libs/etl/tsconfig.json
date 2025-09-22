@@ -1,0 +1,14 @@
+{
+	"extends": "../../tsconfig.base.json",
+
+	"compilerOptions": {
+		"module": "esnext",
+		"moduleResolution": "bundler",
+		"verbatimModuleSyntax": true,
+		"types": ["node"],
+
+		"rootDir": "./src"
+	},
+
+	"include": ["src"]
+}

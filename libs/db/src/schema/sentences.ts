@@ -19,5 +19,6 @@ export const sentenceTexts = pgTable('sentence_texts', {
    primaryKey({ columns: [t.sentenceId, t.lang] }),
    // Optional: prevent exact duplicates per language
 	//! constraint probably not respected in the current Odyssee DB, a few sentences have duplicate text
-   uniqueIndex('uniq_sentence_text_lang_text').on(t.lang, t.text)
+	//! -> yep, failed on 'Key (lang, text)=(ja, 私は毎週両親に電話する。) already exists.'
+   // uniqueIndex('uniq_sentence_text_lang_text').on(t.lang, t.text)
 ])

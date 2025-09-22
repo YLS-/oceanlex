@@ -1,0 +1,1 @@
+DROP INDEX "uniq_sentence_text_lang_text";

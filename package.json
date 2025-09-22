@@ -12,6 +12,7 @@
 		"db:studio": "pnpm --filter @oceanlex/db run studio"
 	},
 	"devDependencies": {
+		"drizzle-orm": "0.44.5",
 		"prettier": "^3.3.3",
 		"turbo": "^2.5.6"
 	}

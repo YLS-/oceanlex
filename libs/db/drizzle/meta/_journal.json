@@ -29,6 +29,34 @@
       "when": 1758476698921,
       "tag": "0003_long_spot",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1758483732036,
+      "tag": "0004_striped_sentry",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1758506668082,
+      "tag": "0005_chief_nekra",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1758507162788,
+      "tag": "0006_charming_butterfly",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1758507330863,
+      "tag": "0007_quick_garia",
+      "breakpoints": true
     }
   ]
 }

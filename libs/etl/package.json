@@ -1,0 +1,19 @@
+{
+	"name": "@oceanlex/etl",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"seed:languages": "tsx src/seed-languages.ts",
+		"import:sentences": "tsx src/import-sentences.ts data/sentences.ndjson",
+		"import:words": "tsx src/import-words.ts data/dict_*.ndjson"
+	},
+	"dependencies": {
+		"@oceanlex/db": "workspace:*"
+	},
+	"devDependencies": {
+		"@types/node": "^24.5.2",
+		"dotenv": "^16.4.5",
+		"fast-glob": "^3.3.3",
+		"tsx": "^4.19.0"
+	}
+}

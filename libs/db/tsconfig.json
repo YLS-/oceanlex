@@ -2,8 +2,10 @@
 	"extends": "../../tsconfig.base.json",
 
 	"compilerOptions": {
-		"module": "commonjs",
-		
+		"module": "esnext",
+		"moduleResolution": "bundler",
+		"verbatimModuleSyntax": true,
+
 		"rootDir": "./src",
 		"outDir": "./dist",
 

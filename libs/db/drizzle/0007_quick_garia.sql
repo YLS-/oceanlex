@@ -1,0 +1,1 @@
+ALTER TABLE "meanings" ALTER COLUMN "pos" SET DATA TYPE varchar(60);

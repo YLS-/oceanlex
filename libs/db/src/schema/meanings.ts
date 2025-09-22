@@ -13,7 +13,7 @@ export const meanings = pgTable('meanings', {
    wordId: integer('word_id').notNull().references(() => words.id, { onDelete: 'cascade' }),
    order: integer('order').notNull(),                      // position in the word’s meanings[]
 
-	pos: varchar('pos', { length: 8 }),			// part of speech (overriding word.pos if non-null)
+	pos: varchar('pos', { length: 60 }),			// part of speech (overriding word.pos if non-null)
 }, (m) => [
 	// enforce ordered meanings per word
    uniqueIndex('uniq_meanings_word_order').on(m.wordId, m.order)
