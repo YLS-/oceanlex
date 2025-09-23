@@ -2,18 +2,22 @@
 import { Injectable } from '@nestjs/common'
 
 // DB
-import { HeadwordSuggestion, LanguageCode } from '@oceanlex/models'
 import { db, wordHeadwords, words } from '@oceanlex/db'
 import { and, asc, eq, gte, inArray } from 'drizzle-orm'
+
+// Headwords
+import type { HeadwordSuggestion } from '@oceanlex/models'
+import { GetHeadwordsDto } from './dto/get-headwords.dto'
 
 @Injectable()
 export class HeadwordsService {
 
-	public async search(prefix: string, targetLang: LanguageCode, total: number = 10): Promise<HeadwordSuggestion[]> {
+	public async search(q: GetHeadwordsDto): Promise<HeadwordSuggestion[]> {
+		const { query: prefix, lang: targetLang, limit } = q
 		// TODO: consider whether to handle "around prefix" search mode or not
 		// const beforeCount = Math.floor(total / 2)
 		// const afterCount = total - beforeCount
-		const afterCount = total
+		const afterCount = limit
 
 		const afterRows = await db.select({
 			_wordId: words.id,

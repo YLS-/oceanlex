@@ -1,9 +1,9 @@
 // Nest
-import { Controller, Get } from '@nestjs/common'
+import { Controller, Get, Query } from '@nestjs/common'
 
-// Words
+// Headwords module
 import { HeadwordsService } from './headwords.service'
-import { LanguageCode } from '@oceanlex/models'
+import { GetHeadwordsDto } from './dto/get-headwords.dto'
 
 @Controller('headwords')
 export class HeadwordsController {
@@ -13,13 +13,7 @@ export class HeadwordsController {
 	) {}
 
 	@Get()
-	public search() {
-		const testQuery = {
-			prefix: 'cam',
-			targetLang: 'fr' as LanguageCode,
-			total: 10
-		}
-
-		return this.headwordsService.search(testQuery.prefix, testQuery.targetLang, testQuery.total)
+	public search(@Query() q: GetHeadwordsDto) {
+		return this.headwordsService.search(q)
 	}
 }

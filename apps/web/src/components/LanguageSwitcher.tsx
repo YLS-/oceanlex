@@ -1,7 +1,7 @@
 'use client'
+import { usePathname, useRouter } from 'next/navigation'
 import { useLang } from '@/app/[lang]/LangContext'
-import { LanguageCode } from '@models/index'
-import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { LanguageCode } from '@oceanlex/models'
 
 const langs = [
 	{ code: 'fr', label: 'Français' },

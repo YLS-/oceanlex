@@ -6,6 +6,7 @@ export default async function LangLayout({ children, params }: {
 	children: React.ReactNode
 	params: Promise<{ lang: LanguageCode }>
 }) {
+	// server-side params
 	const { lang } = await params
 
 	return (
