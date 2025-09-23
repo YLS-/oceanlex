@@ -31,3 +31,6 @@ export const wordHeadwords = pgTable('word_headwords', {
 export const wordsMeanings = relations(words, ({ many }) => ({
 	meanings: many(meanings)
 }))
+
+// ---- Row model types (DB shape) ----
+export type WordRow = typeof words.$inferSelect

@@ -22,3 +22,7 @@ export const sentenceTexts = pgTable('sentence_texts', {
 	//! -> yep, failed on 'Key (lang, text)=(ja, 私は毎週両親に電話する。) already exists.'
    // uniqueIndex('uniq_sentence_text_lang_text').on(t.lang, t.text)
 ])
+
+
+// ---- Row model types (DB shape) ----
+export type SentenceRow = typeof sentences.$inferSelect

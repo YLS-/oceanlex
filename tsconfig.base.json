@@ -5,6 +5,10 @@
 		"jsx": "react-jsx",
 		"strict": true,
 		"noUncheckedIndexedAccess": true,
-		"skipLibCheck": true
+		"skipLibCheck": true,
+
+		"paths": {
+			"@models/*": ["./libs/models/src/*"]
+		}
 	}
 }

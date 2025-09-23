@@ -33,3 +33,7 @@ export const meaningsRelations = relations(meanings, ({ many, one }) => ({
    word: one(words, { fields: [meanings.wordId], references: [words.id] }),
    sentenceLinks: many(meaningSentences)
 }))
+
+
+// ---- Row model types (DB shape) ----
+export type MeaningRow = typeof meanings.$inferSelect

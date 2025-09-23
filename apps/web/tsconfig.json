@@ -18,7 +18,12 @@
 		"plugins": [{ "name": "next" }],
 
 		"paths": {
-			"@/*": ["./src/*"]
+			"@/*": ["./src/*"],
+			"@components/*": ["./src/components/*"],
+			"@stores/*": ["./src/stores/*"],
+			"@libs/*": ["./src/libs/*"],
+
+			"@models/*": ["./../../libs/models/src/*"]
 		}
 	},
 
