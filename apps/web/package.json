@@ -13,6 +13,7 @@
 		"typecheck": "tsc -p tsconfig.json --noEmit"
 	},
 	"dependencies": {
+		"@oceanlex/models": "workspace:*",
 		"next": "15.5.3",
 		"react": "19.1.0",
 		"react-dom": "19.1.0",

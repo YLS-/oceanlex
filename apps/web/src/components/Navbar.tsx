@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import LanguageSwitcher from './LanguageSwitcher'
 import { useLang } from '@/app/[lang]/LangContext'
-import { LanguageCode } from '@models/index'
+import { LanguageCode } from '@oceanlex/models'
 
 
 export default function Navbar() {

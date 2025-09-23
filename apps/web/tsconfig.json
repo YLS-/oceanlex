@@ -18,12 +18,10 @@
 		"plugins": [{ "name": "next" }],
 
 		"paths": {
-			"@/*": ["./src/*"],
-			"@components/*": ["./src/components/*"],
-			"@stores/*": ["./src/stores/*"],
-			"@libs/*": ["./src/libs/*"],
-
-			"@models/*": ["./../../libs/models/src/*"]
+			"@/*": ["./src/*"]
+			// "@components/*": ["./src/components/*"],
+			// "@stores/*": ["./src/stores/*"],
+			// "@libs/*": ["./src/libs/*"]
 		}
 	},
 

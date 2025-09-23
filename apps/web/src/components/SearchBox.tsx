@@ -2,7 +2,9 @@
 import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useLang } from '@/app/[lang]/LangContext'
-import { LanguageCode, HeadwordSuggestion } from '@models/index'
+
+// Language models
+import { LanguageCode, HeadwordSuggestion } from '@oceanlex/models'
 
 
 export default function SearchBox() {
@@ -26,7 +28,7 @@ export default function SearchBox() {
 
 		const t = setTimeout(async () => {
 			try {
-				const url = `${apiBase}/words/headwords?lang=${lang}&q=${encodeURIComponent(query)}&limit=10`
+				const url = `${apiBase}/headwords?lang=${lang}&q=${encodeURIComponent(query)}&limit=10`
 				const res = await fetch(url, { signal: ctrl.signal })
 				const data: HeadwordSuggestion[] = await res.json()
 				setItems(data)

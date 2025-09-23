@@ -1,5 +1,5 @@
-import type { LanguageCode } from '@models/index'
-import Navbar from '@components/Navbar'
+import type { LanguageCode } from '@oceanlex/models'
+import Navbar from '@/components/Navbar'
 import { LangProvider } from './LangContext'
 
 export default async function LangLayout({ children, params }: {
