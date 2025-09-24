@@ -1,5 +1,5 @@
 # data
-libs/etl/data
+scripts/etl/data
 
 # dependencies
 node_modules/

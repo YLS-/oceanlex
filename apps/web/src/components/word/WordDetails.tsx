@@ -1,6 +1,6 @@
 import type { LanguageCode, Word } from "@oceanlex/models"
 import MeaningItem from "./MeaningItem"
-import PosTag from "@/components/PosTag"
+import PosTag from "@/components/ui/PosTag"
 
 
 export default function WordDetails({ word, lang }: { word: Word, lang: LanguageCode }) {

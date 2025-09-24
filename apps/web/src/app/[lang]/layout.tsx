@@ -2,8 +2,8 @@
 import { notFound } from 'next/navigation'
 
 // Oceanlex models
-import { isLanguageCode, type LanguageCode } from '@oceanlex/models'
-import Navbar from '@/components/Navbar'
+import { isLanguageCode } from '@oceanlex/models'
+import Navbar from '@/components/navigation/Navbar'
 import { LangProvider } from './LangContext'
 
 

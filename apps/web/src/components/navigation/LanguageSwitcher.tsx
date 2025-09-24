@@ -3,7 +3,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useLang } from '@/app/[lang]/LangContext'
 import { LanguageCode } from '@oceanlex/models'
 
-const langs = [
+const DICTIONARY_LANGUAGES = [
 	{ code: 'fr', label: 'Français' },
 	{ code: 'ja', label: '日本語' },
 	{ code: 'zh', label: '中文' },
@@ -33,7 +33,7 @@ export default function LanguageSwitcher() {
 			onChange={onChange}
 			className="rounded-xl border px-3 py-1.5 text-sm shadow-sm focus:outline-none"
 		>
-			{ langs.map(l => (
+			{ DICTIONARY_LANGUAGES.map(l => (
 				<option key={l.code} value={l.code}>{l.label}</option>
 			)) }
 		</select>

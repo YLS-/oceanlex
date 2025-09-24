@@ -3,7 +3,7 @@ import { notFound } from "next/navigation"
 
 // Oceanlex models
 import { isLanguageCode } from "@oceanlex/models"
-import SearchBox from '@/components/search/SearchBox'
+import SearchArea from '@/components/search/SearchArea'
 
 
 // params.lang come from the App Router
@@ -16,7 +16,7 @@ export default async function Home({ params }: { params: Promise<{ lang: string 
 				<p className="text-sm text-gray-600">Search headwords. Autocomplete is backed by Postgres for now.</p>
 			</div>
 
-			<SearchBox />
+			<SearchArea />
 
 		</div>)
 }
