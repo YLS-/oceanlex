@@ -1,9 +1,10 @@
 import { MultilingualText } from './language'
 import { Sentence } from './sentence'
+import { LexicalClass } from './lexclasses'
 
 export interface Meaning {
 	translations: MultilingualText
-	pos?: string | null		// options PoS override
+	pos?: LexicalClass | null		// options PoS override
 
 	sentences: Sentence[]
 }

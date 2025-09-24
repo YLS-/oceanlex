@@ -1,5 +1,5 @@
 import { LanguageCode } from "@oceanlex/models"
-import SearchBox from '@/components/SearchBox'
+import SearchBox from '@/components/search/SearchBox'
 
 // params.lang come from the App Router
 export default async function Home({ params }: { params: { lang: LanguageCode } }) {

@@ -15,6 +15,13 @@ async function bootstrap() {
 
 	app.useGlobalPipes(validation)
 
+	app.enableCors({
+		origin: process.env.CORS_ORIGIN,
+		methods: ['GET', 'OPTIONS'],
+		allowedHeaders: ['Content-Type', 'Authorization'],
+		credentials: false,		// true only if actually sending cookies/auth
+	})
+
 	await app.listen(process.env.PORT ?? 3333)
 }
 

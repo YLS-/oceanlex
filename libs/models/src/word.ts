@@ -1,4 +1,5 @@
 import type { LanguageCode, MultilingualText } from './language'
+import { LexicalClass } from './lexclasses'
 import type { Meaning } from './meaning'
 
 export interface Word {
@@ -7,7 +8,7 @@ export interface Word {
 
 	headwords: MultilingualText
 	phonetic: string | null
-	pos: string | null
+	pos: LexicalClass | null
 	lexeme_tags: string | null
 
 	meanings: Meaning[]

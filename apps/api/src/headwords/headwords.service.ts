@@ -2,12 +2,13 @@
 import { Injectable } from '@nestjs/common'
 
 // DB
-import { db, wordHeadwords, words } from '@oceanlex/db'
+import { db, wordHeadwords$, words$ } from '@oceanlex/db'
 import { and, asc, eq, gte, inArray } from 'drizzle-orm'
 
 // Headwords
-import type { HeadwordSuggestion } from '@oceanlex/models'
 import { GetHeadwordsDto } from './dto/get-headwords.dto'
+import type { HeadwordSuggestion, LexicalClass } from '@oceanlex/models'
+
 
 @Injectable()
 export class HeadwordsService {
@@ -20,32 +21,34 @@ export class HeadwordsService {
 		const afterCount = limit
 
 		const afterRows = await db.select({
-			_wordId: words.id,
-			firestoreId: words.firestoreId,
-			pos: words.pos,
-			headwords: wordHeadwords.text
+			_wordId: words$.id,
+			firestoreId: words$.firestoreId,
+			pos: words$.pos,
+			headwords: wordHeadwords$.text
 		})
 		// join words and headwords tables
-		.from(wordHeadwords)
-		.innerJoin(words, eq(words.id, wordHeadwords.wordId))
+		.from(wordHeadwords$)
+		.innerJoin(words$, eq(words$.id, wordHeadwords$.wordId))
 		// filter by language and prefix
 		.where(and(
-			eq(words.lang, targetLang),
-			gte(wordHeadwords.text, prefix)
+			// need to restrict headwords to target language;
+			// constraining only on words.lang can allow headwords in other languages with same prefix
+			eq(wordHeadwords$.lang, targetLang),
+			gte(wordHeadwords$.text, prefix)
 		))
-		.orderBy(asc(wordHeadwords.text))
+		.orderBy(asc(wordHeadwords$.text))
 		.limit(afterCount)
 
 		// additional query to merge English headwords, keeping lexicographical order of target language
 		const orderedIds = afterRows.map(row => row._wordId)
 		const enHeadwordsRows = await db.select({
-			_wordId: wordHeadwords.wordId,
-			text_en: wordHeadwords.text
+			_wordId: wordHeadwords$.wordId,
+			text_en: wordHeadwords$.text
 		})
-		.from(wordHeadwords)
+		.from(wordHeadwords$)
 		.where(and(
-			eq(wordHeadwords.lang, 'en'),
-			inArray(wordHeadwords.wordId, orderedIds)
+			eq(wordHeadwords$.lang, 'en'),
+			inArray(wordHeadwords$.wordId, orderedIds)
 		))
 
 		const enHeadwordsMap = new Map<number, string>()
@@ -57,7 +60,7 @@ export class HeadwordsService {
 		const results: HeadwordSuggestion[] = afterRows.map(wordRow => ({
 			wordId: wordRow.firestoreId,
 			lang: targetLang,
-			pos: wordRow.pos,
+			pos: wordRow.pos as LexicalClass,
 			headwords: {
 				[targetLang]: wordRow.headwords,
 				en: enHeadwordsMap.get(wordRow._wordId) ?? null

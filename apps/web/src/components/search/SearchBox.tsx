@@ -1,10 +1,10 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { useLang } from '@/app/[lang]/LangContext'
 
 // Language models
 import { LanguageCode, HeadwordSuggestion } from '@oceanlex/models'
+import SearchResults from './SearchResults'
 
 
 export default function SearchBox() {
@@ -12,7 +12,6 @@ export default function SearchBox() {
 	const [items, setItems] = useState<HeadwordSuggestion[]>([])
 	const [loading, setLoading] = useState(false)
 	const [open, setOpen] = useState(false)
-	const router = useRouter()
 	const lang: LanguageCode = useLang()
 	const abortRef = useRef<AbortController | null>(null)
 
@@ -28,10 +27,11 @@ export default function SearchBox() {
 
 		const t = setTimeout(async () => {
 			try {
-				const url = `${apiBase}/headwords?lang=${lang}&q=${encodeURIComponent(query)}&limit=10`
+				const url = `${apiBase}/headwords?lang=${lang}&query=${encodeURIComponent(query)}&limit=10`
 				const res = await fetch(url, { signal: ctrl.signal })
-				const data: HeadwordSuggestion[] = await res.json()
-				setItems(data)
+				const results: HeadwordSuggestion[] = await res.json()
+				console.log(results)
+				setItems(results)
 				setOpen(true)
 			} catch (e) {
 				if ((e as any).name !== 'AbortError') console.error(e)
@@ -41,11 +41,12 @@ export default function SearchBox() {
 		return () => { clearTimeout(t); ctrl.abort() }
 	}, [query, lang])
 
+	// TODO: allow selection with arrow keys
 	function onSubmit(e: React.FormEvent) {
 		e.preventDefault()
 
-		const firstItem = items[0]
-		if (firstItem) router.push(`/${lang}/word/${firstItem.wordId}`)
+		// const firstItem = items[0]
+		// if (firstItem) router.push(`/${lang}/word/${firstItem.wordId}`)
 	}
 
 	return (
@@ -61,18 +62,7 @@ export default function SearchBox() {
 			</form>
 
 			{open && items.length > 0 && (
-				<ul className="absolute z-40 mt-2 w-full overflow-hidden rounded-xl border bg-white shadow">
-					{items.map(s => (
-						<li key={s.wordId}>
-							<button
-								className="block w-full px-4 py-2 text-left hover:bg-gray-50"
-								onClick={ () => router.push(`/${lang}/word/${s.wordId}`)}
-							>
-								{s.headwords[lang]}
-							</button>
-						</li>
-					))}
-				</ul>
+				<SearchResults results={items} />
 			)}
 
 			{loading && <div className="absolute right-3 top-3 text-sm text-gray-500">…</div>}

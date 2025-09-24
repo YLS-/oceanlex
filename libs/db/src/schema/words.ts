@@ -3,15 +3,15 @@ import { pgTable, serial, text, varchar, integer, primaryKey } from 'drizzle-orm
 import { relations } from 'drizzle-orm'
 
 // Odyssee schemas
-import { languages } from './languages'
-import { meanings } from './meanings'
+import { languages$ } from './languages'
+import { meanings$ } from './meanings'
 
 // dictionary entries
-export const words = pgTable('words', {
+export const words$ = pgTable('words', {
 	id: serial('id').primaryKey(),
 	firestoreId: text('firestore_id').notNull(),
 	// dictionary language that the entry belongs to
-	lang: varchar('lang', { length: 8 }).notNull().references(() => languages.code, { onDelete: 'restrict' }),
+	lang: varchar('lang', { length: 8 }).notNull().references(() => languages$.code, { onDelete: 'restrict' }),
 
 	phonetic: text('phonetic'),
 	pos: varchar('pos', { length: 8 }),
@@ -19,18 +19,18 @@ export const words = pgTable('words', {
 })
 
 // multilingual headwords
-export const wordHeadwords = pgTable('word_headwords', {
-	wordId: integer('word_id').notNull().references(() => words.id, { onDelete: 'cascade' }),
-	lang: varchar('lang', { length: 8 }).notNull().references(() => languages.code, { onDelete: 'restrict' }),
+export const wordHeadwords$ = pgTable('word_headwords', {
+	wordId: integer('word_id').notNull().references(() => words$.id, { onDelete: 'cascade' }),
+	lang: varchar('lang', { length: 8 }).notNull().references(() => languages$.code, { onDelete: 'restrict' }),
 	text: text('text').notNull()
 }, (h) => [
 	primaryKey({ columns: [h.wordId, h.lang] })
 ])
 
 // word's array of meanings
-export const wordsMeanings = relations(words, ({ many }) => ({
-	meanings: many(meanings)
+export const wordsMeanings = relations(words$, ({ many }) => ({
+	meanings: many(meanings$)
 }))
 
 // ---- Row model types (DB shape) ----
-export type WordRow = typeof words.$inferSelect
+export type WordRow = typeof words$.$inferSelect

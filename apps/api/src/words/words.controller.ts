@@ -1,8 +1,12 @@
 // Nest
-import { Controller, Get } from '@nestjs/common'
+import { Controller, Get, Query } from '@nestjs/common'
 
 // Words
 import { WordsService } from './words.service'
+import { GetWordDto } from './dto/get-word.dto'
+
+// test with:
+// curl -s "http://localhost:3333/words?id=f8lErjrEIXUfFy1GJQwt" | jq
 
 @Controller('words')
 export class WordsController {
@@ -12,7 +16,7 @@ export class WordsController {
 	) {}
 
 	@Get()
-	public list() {
-		return this.wordsService.list()
+	public getWord(@Query() q: GetWordDto) {
+		return this.wordsService.getWord(q)
 	}
 }

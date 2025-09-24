@@ -2,18 +2,18 @@
 import { pgTable, serial, text, varchar, integer, primaryKey, uniqueIndex } from 'drizzle-orm/pg-core'
 
 // Odyssee schemas
-import { languages } from './languages'
+import { languages$ } from './languages'
 
-export const sentences = pgTable('sentences', {
+export const sentences$ = pgTable('sentences', {
    id: serial('id').primaryKey(),
    firestoreId: text('firestore_id').notNull()
 })
 
 // normalize (flatten) sentence text by language
 // i.e. composite primary key: '00un5KJ5DrT8Dt1htcdQ_en', '00un5KJ5DrT8Dt1htcdQ_fr', etc
-export const sentenceTexts = pgTable('sentence_texts', {
-   sentenceId: integer('sentence_id').notNull().references(() => sentences.id, { onDelete: 'cascade' }),
-   lang: varchar('lang', { length: 8 }).notNull().references(() => languages.code, { onDelete: 'restrict' }),
+export const sentenceTexts$ = pgTable('sentence_texts', {
+   sentenceId: integer('sentence_id').notNull().references(() => sentences$.id, { onDelete: 'cascade' }),
+   lang: varchar('lang', { length: 8 }).notNull().references(() => languages$.code, { onDelete: 'restrict' }),
    text: text('text').notNull()
 }, (t) => [
    primaryKey({ columns: [t.sentenceId, t.lang] }),
@@ -25,4 +25,4 @@ export const sentenceTexts = pgTable('sentence_texts', {
 
 
 // ---- Row model types (DB shape) ----
-export type SentenceRow = typeof sentences.$inferSelect
+export type SentenceRow = typeof sentences$.$inferSelect

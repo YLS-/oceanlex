@@ -3,14 +3,14 @@ import { pgTable, serial, integer, varchar, uniqueIndex, text, primaryKey } from
 import { relations } from 'drizzle-orm'
 
 // Odyssee schemas
-import { words } from './words'
-import { meaningSentences } from './meaningSentences'
-import { languages } from './languages'
+import { words$ } from './words'
+import { meaningSentences$ } from './meaningSentences'
+import { languages$ } from './languages'
 
 // meanings belonging to a unique parent word
-export const meanings = pgTable('meanings', {
+export const meanings$ = pgTable('meanings', {
    id: serial('id').primaryKey(),
-   wordId: integer('word_id').notNull().references(() => words.id, { onDelete: 'cascade' }),
+   wordId: integer('word_id').notNull().references(() => words$.id, { onDelete: 'cascade' }),
    order: integer('order').notNull(),                      // position in the word’s meanings[]
 
 	pos: varchar('pos', { length: 60 }),			// part of speech (overriding word.pos if non-null)
@@ -20,20 +20,20 @@ export const meanings = pgTable('meanings', {
 ])
 
 // multilingual translations of a meaning
-export const meaningTranslations = pgTable('meaning_translations', {
-   meaningId: integer('meaning_id').notNull().references(() => meanings.id, { onDelete: 'cascade' }),
-   lang: varchar('lang', { length: 8 }).notNull().references(() => languages.code, { onDelete: 'restrict' }),
+export const meaningTranslations$ = pgTable('meaning_translations', {
+   meaningId: integer('meaning_id').notNull().references(() => meanings$.id, { onDelete: 'cascade' }),
+   lang: varchar('lang', { length: 8 }).notNull().references(() => languages$.code, { onDelete: 'restrict' }),
    text: text('text').notNull()
 }, (tr) => [
    primaryKey({ columns: [tr.meaningId, tr.lang] })
 ])
 
 // meaning's array of sentence IDs
-export const meaningsRelations = relations(meanings, ({ many, one }) => ({
-   word: one(words, { fields: [meanings.wordId], references: [words.id] }),
-   sentenceLinks: many(meaningSentences)
+export const meaningsRelations = relations(meanings$, ({ many, one }) => ({
+   word: one(words$, { fields: [meanings$.wordId], references: [words$.id] }),
+   sentenceLinks: many(meaningSentences$)
 }))
 
 
 // ---- Row model types (DB shape) ----
-export type MeaningRow = typeof meanings.$inferSelect
+export type MeaningRow = typeof meanings$.$inferSelect
