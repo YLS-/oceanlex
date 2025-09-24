@@ -1,8 +1,14 @@
-import { LanguageCode } from "@oceanlex/models"
+// Next
+import { notFound } from "next/navigation"
+
+// Oceanlex models
+import { isLanguageCode } from "@oceanlex/models"
 import SearchBox from '@/components/search/SearchBox'
 
+
 // params.lang come from the App Router
-export default async function Home({ params }: { params: { lang: LanguageCode } }) {
+export default async function Home({ params }: { params: Promise<{ lang: string }> }) {
+
 	return (
 		<div className="space-y-6">
 			<div className="text-center">

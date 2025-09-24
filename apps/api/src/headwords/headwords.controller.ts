@@ -6,7 +6,7 @@ import { HeadwordsService } from './headwords.service'
 import { GetHeadwordsDto } from './dto/get-headwords.dto'
 
 // test with:
-// curl -s "http://localhost:3333/headwords?lang=fr&query=ma&limit=4" | jq
+// curl -s "http://localhost:3333/headwords?sl=fr&tl=en&query=rue&limit=5&mode=around" | jq
 
 @Controller('headwords')
 export class HeadwordsController {

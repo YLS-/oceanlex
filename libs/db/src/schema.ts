@@ -1,5 +1,0 @@
-export * from './schema/languages'
-export * from './schema/words'
-export * from './schema/meanings'
-export * from './schema/sentences'
-export * from './schema/meaningSentences'

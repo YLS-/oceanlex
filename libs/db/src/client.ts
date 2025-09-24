@@ -12,4 +12,4 @@ const pool = new Pool({
 
 export type Schema = NodePgDatabase<typeof schema>
 export const db: Schema = drizzle(pool, { schema })
-export { schema }
+// export { schema }

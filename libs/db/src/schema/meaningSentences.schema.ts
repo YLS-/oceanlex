@@ -2,8 +2,8 @@
 import { pgTable, primaryKey, integer, uniqueIndex } from 'drizzle-orm/pg-core'
 
 // Odyssee schemas
-import { sentences$ } from './sentences'
-import { meanings$ } from './meanings'
+import { sentences$ } from './sentences.schema'
+import { meanings$ } from './meanings.schema'
 
 // link table for meaning-sentence relationships
 export const meaningSentences$ = pgTable('meaning_sentences', {

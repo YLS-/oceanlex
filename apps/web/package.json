@@ -6,14 +6,17 @@
 	"private": true,
 	"license": "UNLICENSED",
 	"scripts": {
-		"dev": "next dev -p 3000 --turbopack",
+		"dev": "run-p dev:next typecheck:watch",
+		"dev:next": "next dev -p 3000 --turbopack",
 		"build": "next build --turbopack",
 		"start": "next start",
 		"lint": "eslint",
-		"typecheck": "tsc -p tsconfig.json --noEmit"
+		"typecheck": "tsc -p tsconfig.json --noEmit",
+		"typecheck:watch": "tsc -p tsconfig.json --noEmit --watch"
 	},
 	"dependencies": {
 		"@oceanlex/models": "workspace:*",
+		"@oceanlex/transport": "workspace:*",
 		"next": "15.5.3",
 		"react": "19.1.0",
 		"react-dom": "19.1.0",
@@ -28,6 +31,7 @@
 		"@types/react-dom": "^19",
 		"eslint": "^9",
 		"eslint-config-next": "15.5.3",
+		"npm-run-all": "^4.1.5",
 		"tailwindcss": "^4",
 		"typescript": "^5"
 	}

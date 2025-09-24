@@ -5,8 +5,7 @@ import readline from 'node:readline'
 
 // Oceanlex DB
 import { eq } from 'drizzle-orm'
-import { db, schema } from '@oceanlex/db'
-const { sentences, sentenceTexts } = schema
+import { db, sentences$, sentenceTexts$ } from '@oceanlex/db'
 
 // Odyssee sentence model
 type SentenceDoc = {
@@ -22,17 +21,17 @@ async function* lines(file: string) {
 
 async function upsertSentence(doc: SentenceDoc) {
 	// header
-	const existing = await db.query.sentences.findFirst({
-		where: eq(sentences.firestoreId, doc._id),
+	const existing = await db.query.sentences$.findFirst({
+		where: eq(sentences$.firestoreId, doc._id),
 		columns: { id: true }
 	})
 
 	let sentenceId: number
 	if (!existing) {
 		const [row] = await db
-			.insert(sentences)
+			.insert(sentences$)
 			.values({ firestoreId: doc._id })
-			.returning({ id: sentences.id })
+			.returning({ id: sentences$.id })
 		sentenceId = row!.id
 	} else {
 		sentenceId = existing.id
@@ -44,11 +43,11 @@ async function upsertSentence(doc: SentenceDoc) {
 
 	if (texts.length) {
 		await db
-			.insert(sentenceTexts)
+			.insert(sentenceTexts$)
 			.values(texts)
 			.onConflictDoUpdate({
-				target: [sentenceTexts.sentenceId, sentenceTexts.lang],
-				set: { text: sentenceTexts.text }
+				target: [sentenceTexts$.sentenceId, sentenceTexts$.lang],
+				set: { text: sentenceTexts$.text }
 			})
 	}
 

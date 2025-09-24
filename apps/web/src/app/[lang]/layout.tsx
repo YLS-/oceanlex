@@ -1,13 +1,19 @@
-import type { LanguageCode } from '@oceanlex/models'
+// Next
+import { notFound } from 'next/navigation'
+
+// Oceanlex models
+import { isLanguageCode, type LanguageCode } from '@oceanlex/models'
 import Navbar from '@/components/Navbar'
 import { LangProvider } from './LangContext'
 
+
 export default async function LangLayout({ children, params }: {
 	children: React.ReactNode
-	params: Promise<{ lang: LanguageCode }>
+	params: Promise<{ lang: string }>
 }) {
 	// server-side params
 	const { lang } = await params
+	if (!isLanguageCode(lang)) return notFound()
 
 	return (
 		<LangProvider lang={lang}>

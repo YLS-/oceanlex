@@ -13,13 +13,15 @@
 	},
 	"scripts": {
 		"dev": "tsx watch src/dev.ts",
-		"studio": "drizzle-kit studio",
-		"generate": "drizzle-kit generate",
-		"migrate": "tsx src/migrate.ts",
 		"build": "tsc -p tsconfig.json",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"db:studio": "drizzle-kit studio",
+		"db:generate": "drizzle-kit generate",
+		"db:migrate": "tsx src/migrate.ts"
 	},
 	"dependencies": {
+		"@oceanlex/models": "workspace:*",
+		"@oceanlex/transport": "workspace:*",
 		"pg": "^8.16.3"
 	},
 	"peerDependencies": {
@@ -28,9 +30,9 @@
 	"devDependencies": {
 		"@types/node": "^24.5.2",
 		"@types/pg": "^8.15.5",
-		"drizzle-orm": "^0.44.5",
 		"dotenv": "^17.2.2",
 		"drizzle-kit": "^0.31.4",
+		"drizzle-orm": "^0.44.5",
 		"tsx": "^4.20.5",
 		"typescript": "^5.9.2"
 	}

@@ -3,13 +3,14 @@ import { useEffect, useRef, useState } from 'react'
 import { useLang } from '@/app/[lang]/LangContext'
 
 // Language models
-import { LanguageCode, HeadwordSuggestion } from '@oceanlex/models'
+import type { LanguageCode } from '@oceanlex/models'
+import { HeadwordsQuerySchema, toQueryString, type HeadwordSearchResult, type HeadwordsSearchQuery } from '@oceanlex/transport'
 import SearchResults from './SearchResults'
 
 
 export default function SearchBox() {
-	const [query, setQuery] = useState('')
-	const [items, setItems] = useState<HeadwordSuggestion[]>([])
+	const [searchQuery, setSearchQuery] = useState('')
+	const [items, setItems] = useState<HeadwordSearchResult[]>([])
 	const [loading, setLoading] = useState(false)
 	const [open, setOpen] = useState(false)
 	const lang: LanguageCode = useLang()
@@ -18,7 +19,7 @@ export default function SearchBox() {
 	const apiBase = process.env.NEXT_PUBLIC_API_URL!
 
 	useEffect(() => {
-		if (!query) { setItems([]); setOpen(false); return }
+		if (!searchQuery) { setItems([]); setOpen(false); return }
 		setLoading(true)
 		abortRef.current?.abort()
 
@@ -27,9 +28,19 @@ export default function SearchBox() {
 
 		const t = setTimeout(async () => {
 			try {
-				const url = `${apiBase}/headwords?lang=${lang}&query=${encodeURIComponent(query)}&limit=10`
+				const request: HeadwordsSearchQuery = {
+					sl: lang,
+					tl: 'en',
+					query: searchQuery,
+					mode: 'around',
+					limit: 10
+				}
+				const parsed = HeadwordsQuerySchema.parse(request)
+				const params = toQueryString(parsed)
+				const url = `${apiBase}/headwords?${params}`
+				
 				const res = await fetch(url, { signal: ctrl.signal })
-				const results: HeadwordSuggestion[] = await res.json()
+				const results: HeadwordSearchResult[] = await res.json()
 				console.log(results)
 				setItems(results)
 				setOpen(true)
@@ -39,7 +50,7 @@ export default function SearchBox() {
 		}, 150)
 
 		return () => { clearTimeout(t); ctrl.abort() }
-	}, [query, lang])
+	}, [searchQuery, lang])
 
 	// TODO: allow selection with arrow keys
 	function onSubmit(e: React.FormEvent) {
@@ -54,8 +65,8 @@ export default function SearchBox() {
 			<form onSubmit={ onSubmit }>
 				<input
 					autoFocus
-					value={query}
-					onChange={(e) => setQuery(e.target.value)}
+					value={searchQuery}
+					onChange={(e) => setSearchQuery(e.target.value)}
 					placeholder="Type a headword…"
 					className="w-full rounded-2xl border px-4 py-3 text-base shadow-sm focus:outline-none focus:ring-2 focus:ring-gray-300"
 				/>

@@ -3,9 +3,9 @@ import { pgTable, serial, integer, varchar, uniqueIndex, text, primaryKey } from
 import { relations } from 'drizzle-orm'
 
 // Odyssee schemas
-import { words$ } from './words'
-import { meaningSentences$ } from './meaningSentences'
-import { languages$ } from './languages'
+import { words$ } from './words.schema'
+import { meaningSentences$ } from './meaningSentences.schema'
+import { languages$ } from './languages.schema'
 
 // meanings belonging to a unique parent word
 export const meanings$ = pgTable('meanings', {

@@ -27,6 +27,7 @@
 		"@nestjs/platform-express": "^11.0.1",
 		"@oceanlex/db": "workspace:*",
 		"@oceanlex/models": "workspace:*",
+		"@oceanlex/transport": "workspace:*",
 		"class-transformer": "^0.5.1",
 		"class-validator": "^0.14.2",
 		"drizzle-orm": "^0.44.5",

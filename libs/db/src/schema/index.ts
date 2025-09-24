@@ -1,0 +1,5 @@
+export * from './languages.schema'
+export * from './words.schema'
+export * from './meanings.schema'
+export * from './sentences.schema'
+export * from './meaningSentences.schema'

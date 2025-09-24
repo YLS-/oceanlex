@@ -2,7 +2,7 @@
 import { pgTable, serial, text, varchar, integer, primaryKey, uniqueIndex } from 'drizzle-orm/pg-core'
 
 // Odyssee schemas
-import { languages$ } from './languages'
+import { languages$ } from './languages.schema'
 
 export const sentences$ = pgTable('sentences', {
    id: serial('id').primaryKey(),

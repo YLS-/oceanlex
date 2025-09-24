@@ -3,8 +3,8 @@ import { pgTable, serial, text, varchar, integer, primaryKey } from 'drizzle-orm
 import { relations } from 'drizzle-orm'
 
 // Odyssee schemas
-import { languages$ } from './languages'
-import { meanings$ } from './meanings'
+import { languages$ } from './languages.schema'
+import { meanings$ } from './meanings.schema'
 
 // dictionary entries
 export const words$ = pgTable('words', {

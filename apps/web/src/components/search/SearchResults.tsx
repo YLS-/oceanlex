@@ -1,9 +1,10 @@
 'use client'
 import { useLang } from '@/app/[lang]/LangContext'
-import { HeadwordSuggestion, LanguageCode } from '@oceanlex/models'
+import { LanguageCode } from '@oceanlex/models'
+import { HeadwordSearchResult } from '@oceanlex/transport'
 import PosTag from '@/components/PosTag'
 
-export default function SearchResults({ results }: { results: HeadwordSuggestion[] }) {
+export default function SearchResults({ results }: { results: HeadwordSearchResult[] }) {
 	const lang: LanguageCode = useLang()
 
 

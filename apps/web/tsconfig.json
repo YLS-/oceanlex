@@ -4,7 +4,6 @@
 	"compilerOptions": {
 		"module": "esnext",
 		"moduleResolution": "bundler",
-
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"allowJs": true,
 		"skipLibCheck": true,
@@ -16,15 +15,17 @@
 		"jsx": "preserve",
 		"incremental": true,
 		"plugins": [{ "name": "next" }],
-
 		"paths": {
 			"@/*": ["./src/*"]
-			// "@components/*": ["./src/components/*"],
-			// "@stores/*": ["./src/stores/*"],
-			// "@libs/*": ["./src/libs/*"]
 		}
 	},
-
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-	"exclude": ["node_modules"]
+	"include": [
+		"**/*.ts",
+		"**/*.tsx",
+		"next-env.d.ts",
+		".next/types/**/*.ts"
+	],
+	"exclude": [
+		"node_modules"
+	]
 }
