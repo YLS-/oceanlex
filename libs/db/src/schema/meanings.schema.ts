@@ -1,10 +1,8 @@
 // Drizzle
 import { pgTable, serial, integer, varchar, uniqueIndex, text, primaryKey } from 'drizzle-orm/pg-core'
-import { relations } from 'drizzle-orm'
 
 // Odyssee schemas
 import { words$ } from './words.schema'
-import { meaningSentences$ } from './meaningSentences.schema'
 import { languages$ } from './languages.schema'
 
 // meanings belonging to a unique parent word
@@ -28,11 +26,6 @@ export const meaningTranslations$ = pgTable('meaning_translations', {
    primaryKey({ columns: [tr.meaningId, tr.lang] })
 ])
 
-// meaning's array of sentence IDs
-export const meaningsRelations = relations(meanings$, ({ many, one }) => ({
-   word: one(words$, { fields: [meanings$.wordId], references: [words$.id] }),
-   sentenceLinks: many(meaningSentences$)
-}))
 
 
 // ---- Row model types (DB shape) ----

@@ -1,10 +1,23 @@
-import { searchHeadwords } from './queries/headwords'
+import { searchHeadwords } from './queries/search-headwords'
+import { getWord } from './queries/get-word'
+
 
 // run with:
 // ts-node src/dev.ts
 
 async function main() {
-	const results = await searchHeadwords({
+	// testHeadwords()
+	testWords()
+}
+
+main().catch(err => {
+	console.error(err)
+	process.exit(1)
+})
+
+
+async function testHeadwords() {
+	const headwords = await searchHeadwords({
 		sourceLang: 'fr',
 		targetLang: 'en',
 		prefix: 'rue',
@@ -12,10 +25,10 @@ async function main() {
 		limit: 5
 	})
 
-	console.dir(results, { depth: null, colors: true })
+	console.dir(headwords, { depth: null, colors: true })
 }
 
-main().catch(err => {
-	console.error(err)
-	process.exit(1)
-})
+async function testWords() {
+	const word = await getWord({ wordId: 'f8lErjrEIXUfFy1GJQwt' })
+	console.dir(word, { depth: null, colors: true })
+}

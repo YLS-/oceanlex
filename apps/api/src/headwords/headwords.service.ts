@@ -10,8 +10,8 @@ import type { HeadwordSearchResult } from '@oceanlex/transport'
 @Injectable()
 export class HeadwordsService {
 
-	public async search(q: GetHeadwordsDto): Promise<HeadwordSearchResult[]> {
-		const { query: prefix, sl, tl, mode, limit } = q
+	public async search(dto: GetHeadwordsDto): Promise<HeadwordSearchResult[]> {
+		const { query: prefix, sl, tl, mode, limit } = dto
 
 		const params: SearchHeadwordsParams = {
 			sourceLang: sl,

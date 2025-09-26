@@ -1,7 +1,7 @@
 // DB
 import { db } from '../client'
-import { wordHeadwords$, words$ } from '../schema'
 import { and, asc, desc, eq, gte, inArray, lt } from 'drizzle-orm'
+import { wordHeadwords$, words$ } from '../schema'
 
 // Oceanlex models
 import { LanguageCode, LexicalClass } from "@oceanlex/models"

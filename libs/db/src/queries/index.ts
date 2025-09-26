@@ -1,1 +1,2 @@
-export * from './headwords'
+export * from './search-headwords'
+export * from './get-word'
