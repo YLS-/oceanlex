@@ -1,0 +1,5 @@
+- SQL schema-query variants
+- /sentences paginated search
+- app UI/UX (layout for both search types, light mode, animations, responsiveness & mobile) -> shadcn
+- auth (NextAuth) -> save words
+- draw app architecture (find tool)
