@@ -1,0 +1,15 @@
+{
+	"files.exclude": {
+		".turbo": true,
+		".vscode": true,
+		"**/dist": true,
+		"**/node_modules": true,
+		"pnpm-lock.yaml": true
+	},
+
+	"explorer.excludeGitIgnore": false,
+
+	"editor.quickSuggestions": { "strings": true },
+	"tailwindCSS.root": ["apps/web"],
+	"tailwindCSS.emmetCompletions": true
+}

@@ -1,0 +1,42 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "[db] Drizzle Studio",
+			"group": { "kind": "build", "isDefault": false },
+			"type": "shell",
+			"command": "pnpm --filter @oceanlex/db run studio",
+			"options": { "cwd": "${workspaceFolder}" },
+			"presentation": { "reveal": "always", "panel": "dedicated", "group": "dev" }
+		},
+		{
+			"label": "[api] NestJS Dev",
+			"group": { "kind": "build", "isDefault": false },
+			"type": "process",
+			"command": "pnpm",
+			"args": ["--filter", "@oceanlex/api", "run", "start:dev"],
+			"options": { "cwd": "${workspaceFolder}" },
+			"presentation": { "reveal": "always", "panel": "dedicated", "group": "dev" }
+		},
+		{
+			"label": "[web] Next.js Dev",
+			"group": { "kind": "build", "isDefault": false },
+			"type": "process",
+			"command": "pnpm",
+			"args": ["--filter", "@oceanlex/web", "run", "dev"],
+			"options": { "cwd": "${workspaceFolder}" },
+			"presentation": { "reveal": "always", "panel": "dedicated", "group": "dev" }
+		},
+		{
+			"label": "[oceanlex] Dev all (Studio + API + Web)",
+			"dependsOn": [
+				"[db] Drizzle Studio",
+				"[api] NestJS Dev",
+				"[web] Next.js Dev"
+			],
+			"dependsOrder": "parallel",
+			"group": { "kind": "build", "isDefault": false },
+			"problemMatcher": []
+		}
+	]
+}
